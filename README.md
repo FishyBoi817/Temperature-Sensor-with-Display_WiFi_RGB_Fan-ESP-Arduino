@@ -1,7 +1,7 @@
 # WiFi-Temperature-Sensor-With-LCD-RGB-Module
 -------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------
-#Description
+# Description
 
 WiFi Temperature Sensor that detects 4-modes which displays different messages and colors. The wireless function allows user
 to customize the message and change color of RGB to their preference using the website. 
@@ -13,7 +13,7 @@ The 4-modes are:
 3. Orange - Between 26 - 29 degrees
 4. Red - Over 30 degrees Celcius
 -------------------------------------------------------------------------------------------------------------------------------
-#Components
+# Components
 
 - 1x ESP32-WROOM-32D
 - 1x HW-479 RGB Module
@@ -23,7 +23,7 @@ The 4-modes are:
 - 1x 220 Ohms Resistor
 - 22x Wires
 -------------------------------------------------------------------------------------------------------------------------------
-#Schematic of Project
+# Schematic of Project
 
 ![Schematic of Project](https://github.com/user-attachments/assets/64578337-2ae8-418e-8027-e0e2d7143ef9)
 -------------------------------------------------------------------------------------------------------------------------------
