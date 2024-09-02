@@ -241,16 +241,16 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
             var humMessage = document.getElementById(idHum).value;
             if(tempMessage != ""){
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("PUT", "/temp?T="+tempMessage, true);
+                xhttp.open("PUT", "/TEMP?T="+tempMessage, true);
                 xhttp.send();
             }
             if(humMessage != ""){
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("PUT", "/hum?H="+humMessage, true);
+                xhttp.open("PUT", "/HUM?H="+humMessage, true);
                 xhttp.send();
             }
             var xhttp = new XMLHttpRequest();
-                xhttp.open("PUT", "/mode?M="+modes, true);
+                xhttp.open("PUT", "/MODE?M="+modes, true);
                 xhttp.send();
         
         }
@@ -271,7 +271,7 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
             xhttp.send();
 
             var xhttp = new XMLHttpRequest();
-            xhttp.open("PUT", "/mode?M=" + modes, true);
+            xhttp.open("PUT", "/MODE?M=" + modes, true);
             xhttp.send();
         }
 
