@@ -15,13 +15,13 @@ The 4-modes are:
 -------------------------------------------------------------------------------------------------------------------------------
 #Components
 
-1x ESP32-WROOM-32D
-1x HW-479 RGB Module
-1x DHT-11 Temperature Sensor
-1x 1602A LCD 16x2 Display
-1x B10K Potentiomenter
-1x 220 Ohms Resistor
-22x Wires
+- 1x ESP32-WROOM-32D
+- 1x HW-479 RGB Module
+- 1x DHT-11 Temperature Sensor
+- 1x 1602A LCD 16x2 Display
+- 1x B10K Potentiomenter
+- 1x 220 Ohms Resistor
+- 22x Wires
 -------------------------------------------------------------------------------------------------------------------------------
 #Schematic of Project
 
