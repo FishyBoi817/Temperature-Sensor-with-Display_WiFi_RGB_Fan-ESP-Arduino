@@ -250,7 +250,7 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                 xhttp.send();
             }
             var xhttp = new XMLHttpRequest();
-                xhttp.open("PUT", "/MODE?M="+modes, true);
+                xhttp.open("PUT", "/MODEa?Ma="+modes, true);
                 xhttp.send();
         
         }
@@ -271,7 +271,7 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
             xhttp.send();
 
             var xhttp = new XMLHttpRequest();
-            xhttp.open("PUT", "/MODE?M=" + modes, true);
+            xhttp.open("PUT", "/MODEb?Mb=" + modes, true);
             xhttp.send();
         }
 
