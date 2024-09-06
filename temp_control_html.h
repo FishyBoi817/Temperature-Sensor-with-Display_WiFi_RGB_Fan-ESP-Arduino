@@ -232,28 +232,30 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                     break;
             }
         }
-        //sends both temperature message and humidity message
+        //Sends both temperature message and humidity message
         function sendMessage(mode){
             var modes = mode.replace('mode', '').replace('Button', '');
             var idTemp = mode.replace('mode', 'temp').replace('Button', '');
             var idHum = mode.replace('mode', 'hum').replace('Button', '');
             var tempMessage = document.getElementById(idTemp).value;
             var humMessage = document.getElementById(idHum).value;
-            if(tempMessage != ""){
+            for(let i = 0; i < 20; i++){
+                if(tempMessage != ""){
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.open("PUT", "/TEMP?T="+tempMessage, true);
+                    xhttp.send();
+                }
+                if(humMessage != ""){
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.open("PUT", "/HUM?H="+humMessage, true);
+                    xhttp.send();
+                }
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("PUT", "/TEMP?T="+tempMessage, true);
-                xhttp.send();
+                    xhttp.open("PUT", "/MODEa?Ma="+modes, true);
+                    xhttp.send();
+            
             }
-            if(humMessage != ""){
-                var xhttp = new XMLHttpRequest();
-                xhttp.open("PUT", "/HUM?H="+humMessage, true);
-                xhttp.send();
-            }
-            var xhttp = new XMLHttpRequest();
-                xhttp.open("PUT", "/MODEa?Ma="+modes, true);
-                xhttp.send();
-        
-        }
+         }
 
         function sendColor(mode){
             var modes = mode.replace('color', '').replace('Button', '');
@@ -266,6 +268,7 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                 var green = match[2];
                 var blue = match[3];
             }
+            for(let i = 0; i < 20; i++){
             var xhttp = new XMLHttpRequest();
             xhttp.open("PUT", "/COLOR?R=" + red + "&G=" + green + "&B=" + blue, true);
             xhttp.send();
@@ -273,6 +276,7 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
             var xhttp = new XMLHttpRequest();
             xhttp.open("PUT", "/MODEb?Mb=" + modes, true);
             xhttp.send();
+            }
         }
 
         function updateColor(mode) {
