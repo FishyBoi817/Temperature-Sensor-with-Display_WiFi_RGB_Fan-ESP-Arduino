@@ -1,0 +1,268 @@
+#ifndef ESP_HTML_H
+#define ESP_HTML_H
+
+// Your HTML content or declarations go here
+const char PAGE_MAIN[] PROGMEM = R"=====(
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature and Humidity Control</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .subtitle {
+            padding-bottom: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .modes-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .Modes {
+            padding: 10px;
+            border: 1px solid #ccc;
+            padding-top: 20px;
+            margin-bottom: 10px;
+            width: 300px;
+            display: none;
+        }
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .message {
+            width: 90%;
+            height: 20px;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .modeButton {
+            margin-left: 210px;
+        }
+        .colorControl {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .colorDisplay {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+        .slider-container {
+            margin: 10px 0;
+        }
+        .slider-container input[type="range"] {
+            appearance: none;
+            width: 300px;
+            height: 8px;
+            background: #ddd;
+            border-radius: 5px;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity .2s;
+        }
+        .slider-container input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: #4CAF50;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .slider-container input[type="range"]::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            background: #4CAF50;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        /* Style for the SVG fan */
+        .fan {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+            transform-origin: 50% 50%;
+        }
+
+        /* Fan animation class */
+        .spinning {
+            animation: spin 1s linear infinite;
+        }
+
+        /* Default fan animation (speed 1) */
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="title">Controls</div>
+    <div class="controls">
+        <label class="subtitle" id="subTexts">Under 20 degrees</label>
+        <div class="button-container">
+            <button class="buttons" id="mode1" onclick="switchMode(this.id)">Mode 1</button>
+            <button class="buttons" id="mode2" onclick="switchMode(this.id)">Mode 2</button>
+            <button class="buttons" id="mode3" onclick="switchMode(this.id)">Mode 3</button>
+            <button class="buttons" id="mode4" onclick="switchMode(this.id)">Mode 4</button>
+        </div>
+        
+        <div class="modes-container">
+            <div class="Modes" id="Mode1">
+                <input type="text" class="message" id="temp1" placeholder="Enter your message for the temperature"><br><br>
+                <input type="text" class="message" id="hum1" placeholder="Enter your message for the humidity"><br><br>
+                <button class="modeButton" id="mode1Button" onclick="sendMessage(this.id)">Submit</button>
+            </div>
+
+            <div class="Modes" id="Mode2">
+                <input type="text" class="message" id="temp2" placeholder="Enter your message for the temperature"><br><br>
+                <input type="text" class="message" id="hum2" placeholder="Enter your message for the humidity"><br><br>
+                <button class="modeButton" id="mode2Button" onclick="sendMessage(this.id)">Submit</button>
+            </div>
+
+            <div class="Modes" id="Mode3">
+                <input type="text" class="message" id="temp3" placeholder="Enter your message for the temperature"><br><br>
+                <input type="text" class="message" id="hum3" placeholder="Enter your message for the humidity"><br><br>
+                <button class="modeButton" id="mode3Button" onclick="sendMessage(this.id)">Submit</button>
+            </div>
+
+            <div class="Modes" id="Mode4">
+                <input type="text" class="message" id="temp4" placeholder="Enter your message for the temperature"><br><br>
+                <input type="text" class="message" id="hum4" placeholder="Enter your message for the humidity"><br><br>
+                <button class="modeButton" id="mode4Button" onclick="sendMessage(this.id)">Submit</button>
+            </div>
+        </div>
+
+        <!-- Fan and LED Color Control - Visible in all modes -->
+        <div>
+            <!-- Fan Image -->
+            <svg id="fanSvg" class="fan spinning" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="#ccc" />
+                <polygon points="50,10 55,50 45,50" fill="#4CAF50" />
+                <polygon points="90,50 50,55 50,45" fill="#4CAF50" />
+                <polygon points="50,90 55,50 45,50" fill="#4CAF50" />
+                <polygon points="10,50 50,45 50,55" fill="#4CAF50" />
+            </svg>
+            
+            <!-- Fan Speed Slider -->
+            <h1 class="subtitle">Fan Speed</h1>
+            <div class="slider-container">
+                <label for="fanSpeedRange">Fan Speed: <span id="fanSpeedValue">0</span>%</label><br>
+                <input type="range" id="fanSpeedRange" min="0" max="100" value="0">
+            </div>
+            <button class="modeButton" id="fanButton" onclick="sendSpeed()">Submit</button>
+        </div>
+
+        <!-- LED Color Control -->
+        <div class="colorControl">
+            <h1 class="subtitle">LED Color</h1>
+            <input type="color" id="ledColorPicker" value="#ff0000">
+            <div class="colorDisplay" id="colorDisplay" style="background-color: #ff0000;"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        // Initialize the page to show only mode 1 by default
+        switchMode('mode1');
+        
+        function switchMode(id) {
+            document.querySelectorAll('.Modes').forEach(function(mode) {
+                mode.style.display = 'none';
+            });
+            document.getElementById(`Mode${id.replace('mode', '')}`).style.display = 'block';
+
+            switch (id) {
+                case "mode1":
+                    document.getElementById('subTexts').textContent = "Under 20 degrees";
+                    break;
+                case "mode2":
+                    document.getElementById('subTexts').textContent = "Between 21 to 25 degrees";
+                    break;
+                case "mode3":
+                    document.getElementById('subTexts').textContent = "Between 25 to 30 degrees";
+                    break;
+                case "mode4":
+                    document.getElementById('subTexts').textContent = "Above 30 degrees";
+                    break;
+            }
+        }
+
+        async function sendSpeed() {
+            var fan = document.getElementById('fanSpeedValue').textContent;
+            var actualSpeed = Math.round((parseInt(fan) / 100) * 255);
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("PUT", "/FAN?F=" + actualSpeed, true);
+            xhttp.send();
+        }
+
+        function updateSpeed() {
+            const fanSpeedRange = document.getElementById('fanSpeedRange');
+            const fanSpeedValue = document.getElementById('fanSpeedValue');
+            const fanSvg = document.getElementById('fanSvg');
+
+            const fanSpeed = fanSpeedRange.value;
+            fanSpeedValue.textContent = `${fanSpeed}`;
+
+            if (fanSpeed == 0) {
+                fanSvg.classList.remove('spinning');
+            } else {
+                fanSvg.classList.add('spinning');
+                const speedFactor = Math.max(0.1, 1 - fanSpeed / 100);
+                fanSvg.style.animationDuration = `${speedFactor}s`;
+            }
+        }
+
+        document.getElementById('fanSpeedRange').addEventListener('input', updateSpeed);
+
+        // LED Color Picker
+        const ledColorPicker = document.getElementById('ledColorPicker');
+        const colorDisplay = document.getElementById('colorDisplay');
+        
+        ledColorPicker.addEventListener('input', function() {
+            colorDisplay.style.backgroundColor = ledColorPicker.value;
+        });
+
+        // Initialize the fan speed with the default slider value
+        updateSpeed();
+    </script>
+</body>
+</html>
+
+)=====";
+
+#endif // ESP_HTML_H
