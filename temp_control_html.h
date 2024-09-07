@@ -178,7 +178,7 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                 </div>
                 <button class="modeButton" id="color1Button" onclick="sendColor(this.id)">Submit</button>
                 <h1 class="subtitle">Fan Speed</h1>
-                <svg id="fanSvg" class="fan spinning" viewBox="0 0 100 100">
+                <svg id="fanSvg1" class="fan spinning" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="40" fill="#ccc" />
                     <polygon points="50,10 55,50 45,50" fill="#4CAF50" />
                     <polygon points="90,50 50,55 50,45" fill="#4CAF50" />
@@ -215,7 +215,7 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                 </div>
                 <button class="modeButton" id="color2Button" onclick="sendColor(this.id)">Submit</button>
                 <h1 class="subtitle">Fan Speed</h1><br>
-                <svg id="fanSvg" class="fan spinning" viewBox="0 0 100 100">
+                <svg id="fanSvg2" class="fan spinning" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="40" fill="#ccc" />
                     <polygon points="50,10 55,50 45,50" fill="#4CAF50" />
                     <polygon points="90,50 50,55 50,45" fill="#4CAF50" />
@@ -252,7 +252,7 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                 </div>
                 <button class="modeButton" id="color3Button" onclick="sendColor(this.id)">Submit</button>
                 <h1 class="subtitle">Fan Speed</h1><br>
-                <svg id="fanSvg" class="fan spinning" viewBox="0 0 100 100">
+                <svg id="fanSvg3" class="fan spinning" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="40" fill="#ccc" />
                     <polygon points="50,10 55,50 45,50" fill="#4CAF50" />
                     <polygon points="90,50 50,55 50,45" fill="#4CAF50" />
@@ -290,7 +290,7 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                 <button class="modeButton" id="color4Button" onclick="sendColor(this.id)">Submit</button>
                 <h1 class="subtitle">Fan Speed</h1> <br>
 
-                <svg id="fanSvg" class="fan spinning" viewBox="0 0 100 100">
+                <svg id="fanSvg4" class="fan spinning" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="40" fill="#ccc" />
                     <polygon points="50,10 55,50 45,50" fill="#4CAF50" />
                     <polygon points="90,50 50,55 50,45" fill="#4CAF50" />
@@ -430,9 +430,9 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
         }
 
         function updateSpeed(mode){
-            const fanSpeedRange = document.getElementById(`fanSpeedRange${mode}`);
+            const fanSpeedRange = document.getElementById(`fanSpeedRange${mode}`); //fanSvg3
             const fanSpeedValue = document.getElementById(`fanSpeedValue${mode}`);
-            const fanSvg = document.getElementById('fanSvg');
+            const fanSvg = document.getElementById(`fanSvg${mode}`);
             const fanSpeed = fanSpeedRange.value;
             fanSpeedValue.textContent = `${fanSpeed}`;
 
