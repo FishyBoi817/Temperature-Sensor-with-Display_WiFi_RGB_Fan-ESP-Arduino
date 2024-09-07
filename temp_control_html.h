@@ -346,7 +346,7 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
             var actualSpeed = Math.round((parseInt(fan)/100)*255);
             for(let i = 0; i < 20; i++){
             var xhttp = new XMLHttpRequest();
-            xhttp.open("PUT", "/FAN?F=" + actual, true);
+            xhttp.open("PUT", "/FAN?F=" + actualSpeed, true);
             xhttp.send();
 
             var xhttp = new XMLHttpRequest();
