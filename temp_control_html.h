@@ -309,6 +309,7 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
     <script type="text/javascript">
         // Initialize the page to show only mode 1 by default
         switchMode('mode1');
+        defaultValues();
         //Switches which mode is active
         function switchMode(id) {
             //Hides all modes at the begining
@@ -393,6 +394,63 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
             xhttp.send();
 
         }
+        function defaultValues(){
+            const color1 = `rgb(0,0,225)`;
+            colorDisplay1.style.backgroundColor = color1;
+            colorValue1.textContent = `Selected Color: ${color1}`;
+            blueRange1.value = 255;
+            blueValue1.textContent = 255;
+            const color2 = `rgb(0,255,0)`;
+            colorDisplay2.style.backgroundColor = color2;
+            colorValue2.textContent = `Selected Color: ${color2}`;
+            greenRange2.value = 255;
+            greenValue2.textContent = 255;
+            const color3 = `rgb(209,15,0)`;
+            colorDisplay3.style.backgroundColor = color3;
+            colorValue3.textContent = `Selected Color: ${color3}`;
+            redRange3.value = 209;
+            redValue3.textContent = 209; //255, 68, 51
+            greenRange3.value = 15;
+            greenValue3.textContent = 15;
+            const color4 = `rgb(255,0,0)`;
+            colorDisplay4.style.backgroundColor = color4;
+            colorValue4.textContent = `Selected Color: ${color4}`;
+            redRange4.value = 255;
+            redValue4.textContent = 255;
+            const fanSpeedRange1 = 0;
+            const fanSpeedValue1 = 0;
+            const fanSvg1 = document.getElementById(`fanSvg1`);
+            const fanSpeed1 = fanSpeedRange1.value;
+            fanSpeedValue1.textContent = `${fanSpeed1}`;
+            fanSvg1.classList.remove('spinning');
+            const fanSpeedRange2 = 0;
+            const fanSpeedValue2 = 0;
+            const fanSvg2 = document.getElementById(`fanSvg2`);
+            const fanSpeed2 = fanSpeedRange2.value;
+            fanSpeedValue2.textContent = `${fanSpeed2}`;
+            fanSvg2.classList.remove('spinning');
+            const fanSpeedRange3 = 50;
+            const fanSpeedValue3 = 50;
+            const fanSvg3 = document.getElementById(`fanSvg3`);
+            const fanSpeed3 = fanSpeedRange3.value;
+            fanSpeedValue3.textContent = `${fanSpeed3}`;
+            fanSvg3.classList.add('spinning');
+            const speedFactor3 = 0.5;
+            fanSvg3.style.animationDuration = `${speedFactor3}s`;
+            document.getElementById(`fanSpeedValue3`).textContent = 50;
+            document.getElementById(`fanSpeedRange3`).value = 50;
+            const fanSpeedRange4 = 100;
+            const fanSpeedValue4 = 100;
+            const fanSvg4 = document.getElementById(`fanSvg4`);
+            const fanSpeed4 = fanSpeedRange1.value;
+            fanSpeedValue4.textContent = `${fanSpeed4}`;
+            fanSvg4.classList.add('spinning');
+            const speedFactor4 = 0.1;
+            fanSvg4.style.animationDuration = `${speedFactor4}s`;
+            document.getElementById(`fanSpeedValue4`).textContent = 100;
+            document.getElementById(`fanSpeedRange4`).value = 100;
+          
+        }
 
         function updateColor(mode) {
             const redRange = document.getElementById(`redRange${mode}`);
@@ -420,7 +478,7 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
         }
 
         function updateSpeed(mode){
-            const fanSpeedRange = document.getElementById(`fanSpeedRange${mode}`); //fanSvg3
+            const fanSpeedRange = document.getElementById(`fanSpeedRange${mode}`); 
             const fanSpeedValue = document.getElementById(`fanSpeedValue${mode}`);
             const fanSvg = document.getElementById(`fanSvg${mode}`);
             const fanSpeed = fanSpeedRange.value;
@@ -433,6 +491,7 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                 const speedFactor = Math.max(0.1, 1 - fanSpeed / 100);
                 fanSvg.style.animationDuration = `${speedFactor}s`;
             }
+           
         }
        
 
@@ -453,12 +512,8 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
             });
         });
 
-        // Initialize the color displays with the default slider values
-        document.querySelectorAll('.Modes').forEach(function(mode) {
-            const modeId = mode.id.replace('Mode', '');
-            updateColor(modeId);
-            updateSpeed(modeId);
-        });
+
+        
     </script>
 </body>
 </html>
