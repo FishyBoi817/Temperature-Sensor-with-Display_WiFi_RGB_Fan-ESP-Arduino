@@ -96,6 +96,33 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
         .slider-container {
             margin: 10px 0;
         }
+        /* Style for the fan speed slider */
+        .slider-container input[type="range"] {
+        appearance: none;
+        width: 300px;
+        height: 8px;
+        background: #ddd;
+        border-radius: 5px;
+        outline: none;
+        opacity: 0.7;
+        transition: opacity .2s;
+        }
+        .slider-container input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: #4CAF50;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .slider-container input[type="range"]::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            background: #4CAF50;
+            cursor: pointer;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
@@ -131,6 +158,13 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                     <p id="colorValue1">Selected Color: #000000</p>
                 </div>
                 <button class="modeButton" id="color1Button" onclick="sendColor(this.id)">Submit</button>
+                <h1 class="subtitle">Fan Speed</h1>
+
+                <div class="slider-container">
+                    <label for="fanSpeedRange">Fan Speed: <span id="fanSpeedValue1">0</span>%</label><br>
+                    <input type="range" id="fanSpeedRange1" min="0" max="100" value="0">
+                </div>
+                <button class="modeButton" id="fan1Button" onclick="sendSpeed(this.id)">Submit</button>
             </div>
             <div class="Modes" id="Mode2">
                 <input type="text" class="message" id="temp2" placeholder="Enter your message for the temperature"><br><br>
@@ -154,6 +188,13 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                     <p id="colorValue2">Selected Color: #000000</p>
                 </div>
                 <button class="modeButton" id="color2Button" onclick="sendColor(this.id)">Submit</button>
+                <h1 class="subtitle">Fan Speed</h1>
+
+                <div class="slider-container">
+                    <label for="fanSpeedRange">Fan Speed: <span id="fanSpeedValue2">0</span>%</label><br>
+                    <input type="range" id="fanSpeedRange2" min="0" max="100" value="0">
+                </div>
+                <button class="modeButton" id="fan2Button" onclick="sendSpeed(this.id)">Submit</button>
             </div>
             <div class="Modes" id="Mode3">
                 <input type="text" class="message" id="temp3" placeholder="Enter your message for the temperature"><br><br>
@@ -177,6 +218,13 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                     <p id="colorValue3">Selected Color: #000000</p>
                 </div>
                 <button class="modeButton" id="color3Button" onclick="sendColor(this.id)">Submit</button>
+                <h1 class="subtitle">Fan Speed</h1>
+
+                <div class="slider-container">
+                    <label for="fanSpeedRange">Fan Speed: <span id="fanSpeedValue3">0</span>%</label><br>
+                    <input type="range" id="fanSpeedRange3" min="0" max="100" value="0">
+                </div>
+                <button class="modeButton" id="fan3Button" onclick="sendSpeed(this.id)">Submit</button>
             </div>
             <div class="Modes" id="Mode4">
                 <input type="text" class="message" id="temp4" placeholder="Enter your message for the temperature"><br><br>
@@ -200,6 +248,13 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                     <p id="colorValue4">Selected Color: #000000</p>
                 </div>
                 <button class="modeButton" id="color4Button" onclick="sendColor(this.id)">Submit</button>
+                <h1 class="subtitle">Fan Speed</h1>
+
+                <div class="slider-container">
+                    <label for="fanSpeedRange">Fan Speed: <span id="fanSpeedValue4">0</span>%</label><br>
+                    <input type="range" id="fanSpeedRange4" min="0" max="100" value="0">
+                </div>
+                <button class="modeButton" id="fan4Button" onclick="sendSpeed(this.id)">Submit</button>
             </div>
         </div>
     </div>
@@ -232,8 +287,12 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                     break;
             }
         }
+        //Adds a delay to sendMessage function
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
         //Sends both temperature message and humidity message
-        function sendMessage(mode){
+        async function sendMessage(mode){
             var modes = mode.replace('mode', '').replace('Button', '');
             var idTemp = mode.replace('mode', 'temp').replace('Button', '');
             var idHum = mode.replace('mode', 'hum').replace('Button', '');
@@ -253,11 +312,12 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                 var xhttp = new XMLHttpRequest();
                     xhttp.open("PUT", "/MODEa?Ma="+modes, true);
                     xhttp.send();
-            
+                
+                await delay(100);
             }
-         }
+        }
 
-        function sendColor(mode){
+        async function sendColor(mode){
             var modes = mode.replace('color', '').replace('Button', '');
             var color = document.getElementById(mode.replace('color', 'colorValue').replace('Button', '')).textContent;
             console.log(color);
@@ -276,6 +336,23 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
             var xhttp = new XMLHttpRequest();
             xhttp.open("PUT", "/MODEb?Mb=" + modes, true);
             xhttp.send();
+            await delay(100);
+            }
+
+        }
+        async function sendSpeed(mode){
+            var modes = mode.replace('fan', '').replace('Button', '');
+            var fan = document.getElementById(mode.replace('fan', 'fanSpeedValue').replace('Button', '')).textContent;
+            var actualSpeed = Math.round((parseInt(fan)/100)*255);
+            for(let i = 0; i < 20; i++){
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("PUT", "/FAN?F=" + actual, true);
+            xhttp.send();
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("PUT", "/MODEc?Mc=" + modes, true);
+            xhttp.send();
+            await delay(100);
             }
         }
 
@@ -303,6 +380,14 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
             greenValue.textContent = green;
             blueValue.textContent = blue;
         }
+
+        function updateSpeed(mode){
+            const fanSpeedRange = document.getElementById(`fanSpeedRange${mode}`);
+            const fanSpeedValue = document.getElementById(`fanSpeedValue${mode}`);
+
+            const fanSpeed = fanSpeedRange.value;
+            fanSpeedValue.textContent = `${fanSpeed}`;
+        }
        
 
         document.querySelectorAll('.Modes').forEach(function(mode) {
@@ -317,12 +402,16 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
             document.getElementById(`blueRange${modeId}`).addEventListener('input', function() {
                 updateColor(modeId);
             });
+            document.getElementById(`fanSpeedRange${modeId}`).addEventListener('input', function() {
+                updateSpeed(modeId);
+            });
         });
 
         // Initialize the color displays with the default slider values
         document.querySelectorAll('.Modes').forEach(function(mode) {
             const modeId = mode.id.replace('Mode', '');
             updateColor(modeId);
+            updateSpeed(modeId);
         });
     </script>
 </body>
