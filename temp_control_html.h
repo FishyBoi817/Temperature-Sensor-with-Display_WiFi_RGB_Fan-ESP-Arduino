@@ -340,13 +340,12 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
             return new Promise(resolve => setTimeout(resolve, ms));
         }
         //Sends both temperature message and humidity message
-        async function sendMessage(mode){
+        function sendMessage(mode){
             var modes = mode.replace('mode', '').replace('Button', '');
             var idTemp = mode.replace('mode', 'temp').replace('Button', '');
             var idHum = mode.replace('mode', 'hum').replace('Button', '');
             var tempMessage = document.getElementById(idTemp).value;
             var humMessage = document.getElementById(idHum).value;
-            for(let i = 0; i < 20; i++){
                 if(tempMessage != ""){
                     var xhttp = new XMLHttpRequest();
                     xhttp.open("PUT", "/TEMP?T="+tempMessage, true);
@@ -360,12 +359,9 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                 var xhttp = new XMLHttpRequest();
                     xhttp.open("PUT", "/MODEa?Ma="+modes, true);
                     xhttp.send();
-                
-                await delay(100);
             }
-        }
 
-        async function sendColor(mode){
+        function sendColor(mode){
             var modes = mode.replace('color', '').replace('Button', '');
             var color = document.getElementById(mode.replace('color', 'colorValue').replace('Button', '')).textContent;
             console.log(color);
@@ -376,7 +372,6 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                 var green = match[2];
                 var blue = match[3];
             }
-            for(let i = 0; i < 20; i++){
             var xhttp = new XMLHttpRequest();
             xhttp.open("PUT", "/COLOR?R=" + red + "&G=" + green + "&B=" + blue, true);
             xhttp.send();
@@ -384,15 +379,11 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
             var xhttp = new XMLHttpRequest();
             xhttp.open("PUT", "/MODEb?Mb=" + modes, true);
             xhttp.send();
-            await delay(100);
-            }
-
         }
-        async function sendSpeed(mode){
+        function sendSpeed(mode){
             var modes = mode.replace('fan', '').replace('Button', '');
             var fan = document.getElementById(mode.replace('fan', 'fanSpeedValue').replace('Button', '')).textContent;
             var actualSpeed = Math.round((parseInt(fan)/100)*255);
-            for(let i = 0; i < 20; i++){
             var xhttp = new XMLHttpRequest();
             xhttp.open("PUT", "/FAN?F=" + actualSpeed, true);
             xhttp.send();
@@ -400,8 +391,7 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
             var xhttp = new XMLHttpRequest();
             xhttp.open("PUT", "/MODEc?Mc=" + modes, true);
             xhttp.send();
-            await delay(100);
-            }
+
         }
 
         function updateColor(mode) {
