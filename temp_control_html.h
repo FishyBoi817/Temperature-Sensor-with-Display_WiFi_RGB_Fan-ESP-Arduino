@@ -123,6 +123,25 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
             cursor: pointer;
             border-radius: 50%;
         }
+
+        .fan {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 10px;
+            transform-origin: 50% 50%;
+        }
+
+        /* Fan animation class */
+        .spinning {
+            animation: spin 1s linear infinite;
+        }
+
+        /* Default fan animation (speed 1) */
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 <body>
@@ -159,6 +178,13 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                 </div>
                 <button class="modeButton" id="color1Button" onclick="sendColor(this.id)">Submit</button>
                 <h1 class="subtitle">Fan Speed</h1>
+                <svg id="fanSvg" class="fan spinning" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="40" fill="#ccc" />
+                    <polygon points="50,10 55,50 45,50" fill="#4CAF50" />
+                    <polygon points="90,50 50,55 50,45" fill="#4CAF50" />
+                    <polygon points="50,90 55,50 45,50" fill="#4CAF50" />
+                    <polygon points="10,50 50,45 50,55" fill="#4CAF50" />
+                </svg>
 
                 <div class="slider-container">
                     <label for="fanSpeedRange">Fan Speed: <span id="fanSpeedValue1">0</span>%</label><br>
@@ -188,7 +214,14 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                     <p id="colorValue2">Selected Color: #000000</p>
                 </div>
                 <button class="modeButton" id="color2Button" onclick="sendColor(this.id)">Submit</button>
-                <h1 class="subtitle">Fan Speed</h1>
+                <h1 class="subtitle">Fan Speed</h1><br>
+                <svg id="fanSvg" class="fan spinning" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="40" fill="#ccc" />
+                    <polygon points="50,10 55,50 45,50" fill="#4CAF50" />
+                    <polygon points="90,50 50,55 50,45" fill="#4CAF50" />
+                    <polygon points="50,90 55,50 45,50" fill="#4CAF50" />
+                    <polygon points="10,50 50,45 50,55" fill="#4CAF50" />
+                </svg>
 
                 <div class="slider-container">
                     <label for="fanSpeedRange">Fan Speed: <span id="fanSpeedValue2">0</span>%</label><br>
@@ -218,7 +251,14 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                     <p id="colorValue3">Selected Color: #000000</p>
                 </div>
                 <button class="modeButton" id="color3Button" onclick="sendColor(this.id)">Submit</button>
-                <h1 class="subtitle">Fan Speed</h1>
+                <h1 class="subtitle">Fan Speed</h1><br>
+                <svg id="fanSvg" class="fan spinning" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="40" fill="#ccc" />
+                    <polygon points="50,10 55,50 45,50" fill="#4CAF50" />
+                    <polygon points="90,50 50,55 50,45" fill="#4CAF50" />
+                    <polygon points="50,90 55,50 45,50" fill="#4CAF50" />
+                    <polygon points="10,50 50,45 50,55" fill="#4CAF50" />
+                </svg>
 
                 <div class="slider-container">
                     <label for="fanSpeedRange">Fan Speed: <span id="fanSpeedValue3">0</span>%</label><br>
@@ -248,7 +288,15 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
                     <p id="colorValue4">Selected Color: #000000</p>
                 </div>
                 <button class="modeButton" id="color4Button" onclick="sendColor(this.id)">Submit</button>
-                <h1 class="subtitle">Fan Speed</h1>
+                <h1 class="subtitle">Fan Speed</h1> <br>
+
+                <svg id="fanSvg" class="fan spinning" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="40" fill="#ccc" />
+                    <polygon points="50,10 55,50 45,50" fill="#4CAF50" />
+                    <polygon points="90,50 50,55 50,45" fill="#4CAF50" />
+                    <polygon points="50,90 55,50 45,50" fill="#4CAF50" />
+                    <polygon points="10,50 50,45 50,55" fill="#4CAF50" />
+                </svg>
 
                 <div class="slider-container">
                     <label for="fanSpeedRange">Fan Speed: <span id="fanSpeedValue4">0</span>%</label><br>
@@ -384,9 +432,17 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
         function updateSpeed(mode){
             const fanSpeedRange = document.getElementById(`fanSpeedRange${mode}`);
             const fanSpeedValue = document.getElementById(`fanSpeedValue${mode}`);
-
+            const fanSvg = document.getElementById('fanSvg');
             const fanSpeed = fanSpeedRange.value;
             fanSpeedValue.textContent = `${fanSpeed}`;
+
+            if (fanSpeed == 0) {
+                fanSvg.classList.remove('spinning');
+            } else {
+                fanSvg.classList.add('spinning');
+                const speedFactor = Math.max(0.1, 1 - fanSpeed / 100);
+                fanSvg.style.animationDuration = `${speedFactor}s`;
+            }
         }
        
 
