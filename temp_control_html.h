@@ -409,7 +409,7 @@ const char PAGE_MAIN[] PROGMEM = R"=====(
             colorDisplay3.style.backgroundColor = color3;
             colorValue3.textContent = `Selected Color: ${color3}`;
             redRange3.value = 209;
-            redValue3.textContent = 209; //255, 68, 51
+            redValue3.textContent = 209; 
             greenRange3.value = 15;
             greenValue3.textContent = 15;
             const color4 = `rgb(255,0,0)`;
