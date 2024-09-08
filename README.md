@@ -43,11 +43,14 @@ https://drive.google.com/file/d/1dPs4J9yAso9zknWFTIyElUigilDU-b4_/view?usp=shari
 https://drive.google.com/file/d/1fZE-pq5UWxq_UPOYhtjlHZbOYoibd5ti/view?usp=sharing
 
 -------------------------------------------------------------------------------------------------------------------------------
-# Additional Refrences
+# Additional Refrences/ Pictures
 -------------------------------------------------------------------------------------------------------------------------------
 # ESP32-WROOM-32D Pinout Diagram
 ![image](https://github.com/user-attachments/assets/529ffe81-990a-4b13-a0dd-024c30f90523)
 
+# Temperature Sensor Project on Bread Board
+
+![Temperature Sensor Project on Breadboard ](https://github.com/user-attachments/assets/45383adc-8dbb-4cdd-bf51-318b8e37363c)
 
 # Website Control Panel Preview
 ![image](https://github.com/user-attachments/assets/6ff445db-e395-4653-9f63-e9537aa8f169)
