@@ -24,6 +24,8 @@ The 4-modes are:
 - 1x B10K Potentiomenter
 - 1x 220 Ohms Resistor
 - 25x Male to Male Jumper Wires
+- 1x Bread Board
+- 1x Micro-usb Cable
 -------------------------------------------------------------------------------------------------------------------------------
 # Schematic of Project
 
