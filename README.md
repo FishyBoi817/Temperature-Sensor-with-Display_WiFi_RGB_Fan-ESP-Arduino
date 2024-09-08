@@ -36,6 +36,16 @@ The 4-modes are:
 
 https://drive.google.com/file/d/1dPs4J9yAso9zknWFTIyElUigilDU-b4_/view?usp=sharing
 
+-------------------------------------------------------------------------------------------------------------------------------
+# Additional Refrences
+
+ESP32-WROOM-32D Pinout Diagram
+https://docs.espressif.com/projects/esp-idf/en/stable/esp32/_images/esp32-devkitC-v4-pinout.png
+
+# Website Control Panel Preview
+![image](https://github.com/user-attachments/assets/6ff445db-e395-4653-9f63-e9537aa8f169)
+-------------------------------------------------------------------------------------------------------------------------------
+
 Readme by Jonathan Ly | Sept 8, 2024
 -------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------
