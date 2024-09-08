@@ -30,6 +30,9 @@ The 4-modes are:
 ![Schematic of Project](https://github.com/user-attachments/assets/a2334de3-de80-4335-881d-8399fa43f85a)
 
 -------------------------------------------------------------------------------------------------------------------------------
+# Video of Website Test (Google Link)
+
+https://drive.google.com/file/d/1dPs4J9yAso9zknWFTIyElUigilDU-b4_/view?usp=sharing
 
 Readme by Jonathan Ly | Sept 8, 2024
 -------------------------------------------------------------------------------------------------------------------------------
