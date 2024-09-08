@@ -13,8 +13,8 @@
 WebServer server(80);
 
 //Your Local WiFi info
-#define LOCAL_SSID "Ricky-Alpha"
-#define LOCAL_PASS "321fX941XAdg"
+#define LOCAL_SSID "ENTER YOUR WIFI SSID NETWORK HERE"
+#define LOCAL_PASS "ENTER TOUR WIFI PASSWORD HERE"
 
 //rgb module setup
 #define RGB_RED 15
