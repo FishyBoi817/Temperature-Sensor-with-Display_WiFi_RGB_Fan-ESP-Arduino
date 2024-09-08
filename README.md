@@ -37,13 +37,13 @@ The 4-modes are:
 https://drive.google.com/file/d/1dPs4J9yAso9zknWFTIyElUigilDU-b4_/view?usp=sharing
 
 -------------------------------------------------------------------------------------------------------------------------------
-## Additional Refrences
-
-ESP32-WROOM-32D Pinout Diagram
+# Additional Refrences
+-------------------------------------------------------------------------------------------------------------------------------
+# ESP32-WROOM-32D Pinout Diagram
 ![image](https://github.com/user-attachments/assets/529ffe81-990a-4b13-a0dd-024c30f90523)
 
 
-## Website Control Panel Preview
+# Website Control Panel Preview
 ![image](https://github.com/user-attachments/assets/6ff445db-e395-4653-9f63-e9537aa8f169)
 -------------------------------------------------------------------------------------------------------------------------------
 
