@@ -13,8 +13,8 @@
 WebServer server(80);
 
 //Your Local WiFi info
-#define LOCAL_SSID "ENTER YOUR WIFI SSID NETWORK HERE"
-#define LOCAL_PASS "ENTER TOUR WIFI PASSWORD HERE"
+const char *LOCAL_SSID = "ESP-32WROOM";
+const char *LOCAL_PASS = "12345678"; //Password Must be 8-char length
 
 //rgb module setup
 #define RGB_RED 15
@@ -258,54 +258,27 @@ void ShiftlcdText(int stringLength){
 
 //Establish WiFi connection and start server, runs in setup()
 void connectWiFiAndStartServer() {
-  WiFi.begin(LOCAL_SSID, LOCAL_PASS);
 
+  // Start the ESP32 as an Access Point (AP) with the network name "ESP32-AP" and a password
+  WiFi.disconnect(true);
+  WiFi.mode(WIFI_AP);
+  WiFi.softAP(LOCAL_SSID, LOCAL_PASS, 6, false);  // Custom SSID: SSID, PASS (8-char), CHANNEL #, HIDE_SSID
+
+  // LCD display update for Access Point mode
   lcd.clear();
-  lcd.setCursor(0,0);
-  lcd.print("   Connecting   ");
-  lcd.setCursor(0,1);
-  lcd.print("    to WiFi");
-  lcd.blink();
-
-  int attempts = 0;
-  const int maxAttempts = 15;
-  const int delayTime = 1000;
-
-  while (WiFi.status() != WL_CONNECTED && attempts < maxAttempts) {
-    Serial.print(".");
-    delay(delayTime);
-    attempts++;
-  }
-
-  lcd.noBlink();  
-
-  if (WiFi.status() == WL_CONNECTED) {
-    
-    String serialConnectionMsg = "Connected to WiFi! Paste IP Address into Web-Browser! \nIP Address: ";
-    Serial.print(serialConnectionMsg);
-    Serial.print(WiFi.localIP());
-    Serial.print("  \n");
-    
-    String lcdConnectionMsg = "Connected to WiFi: " + String(LOCAL_SSID); 
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print(lcdConnectionMsg);
-    lcd.setCursor(0, 1);
-    lcd.print("IP Address: ");
-    lcd.print(WiFi.localIP());
-    ShiftlcdText(lcdConnectionMsg.length());
-    }
-
-  else {
-
-    String lcdConnectionFailedMsg = "Cannot Connect to WiFi: " + String(LOCAL_SSID);
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Connection Failed");
-    lcd.setCursor(0, 1);
-    lcd.print(lcdConnectionFailedMsg);
-    ShiftlcdText(lcdConnectionFailedMsg.length());
-  }
+  lcd.setCursor(0, 0);
+  lcd.print("Access Point Mode");
+  lcd.setCursor(0, 1);
+  lcd.print("IP: " + WiFi.softAPIP().toString());
+  ShiftlcdText(20);  // Adjust scrolling text
+  delay(3000);
+  
+  // Display the IP address on Serial Monitor
+  Serial.print("IP Address: " + WiFi.softAPIP().toString());
+  Serial.print("SSID: ");
+  Serial.println(LOCAL_SSID);  // Print SSID
+  Serial.print(", PASSWORD: ");
+  Serial.println(LOCAL_PASS);  // Print password and move to the next line
 
   server.on("/", SendWebsite);
   server.on("/HUM", ProcessHumidTextChange);
@@ -316,6 +289,7 @@ void connectWiFiAndStartServer() {
   server.on("/MODEb", ProcessModeChange);
   server.on("/MODEc", ProcessModeChange);
   server.begin();
+  
 }
 
 //Send website
